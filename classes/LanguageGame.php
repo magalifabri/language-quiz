@@ -9,7 +9,6 @@ class LanguageGame
 
     public function __construct()
     {
-        $this->words = [];
         $this->gameState = 0;
 
         // :: is used for static functions
@@ -17,7 +16,7 @@ class LanguageGame
         // and are used mostly for more *static* types of data (a fixed set of translations in this case)
         foreach (Data::words() as $frenchTranslation => $englishTranslation) {
             // TODO: create instances of the Word class to be added to the words array
-            array_push($this->words, new Word($englishTranslation, $frenchTranslation));
+            $this->words[] = new Word($englishTranslation, $frenchTranslation);
         }
 
         if (empty($_SESSION['user'])) {
@@ -120,5 +119,7 @@ class LanguageGame
         $this->player->score = 0;
         $this->player->errors = 0;
         $this->player->setName('Anonymous');
+        session_unset();
+        session_destroy();
     }
 }
