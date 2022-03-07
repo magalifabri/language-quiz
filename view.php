@@ -13,8 +13,8 @@
 		<label for="username">Enter your name</label>
 		<input id="username" type="text" name="username">
 	</form>
-	<p>Hello <?= $game->player->name ?></p>
-	<p>Score: <?= $game->player->score ?></p>
+	<p>Hello <?= $_SESSION['username'] ?? '' ?></p>
+	<p>Score: <?= $_SESSION['score'] ?></p>
 	<hr>
 
 	<p>Word to translate:</p>

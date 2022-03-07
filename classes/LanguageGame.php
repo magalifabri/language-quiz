@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+// session_start();
 
 class LanguageGame
 {
@@ -20,7 +20,12 @@ class LanguageGame
             array_push($this->words, new Word($englishTranslation, $frenchTranslation));
         }
 
-        $this->player = new Player('Anonymous', 0);
+        if (empty($_SESSION['username'])) {
+            $this->player = new Player('Anonymous', 0);
+            $_SESSION['user'] = serialize($this->player);
+        } else {
+            $this->player = unserialize($_SESSION['user']);
+        }
     }
 
     public function run(): void
@@ -50,6 +55,8 @@ class LanguageGame
                     . 'New word selected.';
 
                 $this->selectRandomWord();
+
+                $_SESSION['score'] = $_SESSION['score'] + 1;
             } else {
                 $this->userFeedback =
                     'Wrong!'
@@ -62,6 +69,7 @@ class LanguageGame
 
         // TODO: generate a message for the user that can be shown
 
+        // set username
         if (!empty($_POST['username'])) {
             $this->player->setName($_POST['username']);
         }
