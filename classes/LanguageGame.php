@@ -6,6 +6,7 @@ class LanguageGame
 {
     private array $words;
     public string $userFeedback;
+    public Player $player;
 
     public function __construct()
     {
@@ -18,6 +19,8 @@ class LanguageGame
             // TODO: create instances of the Word class to be added to the words array
             array_push($this->words, new Word($englishTranslation, $frenchTranslation));
         }
+
+        $this->player = new Player('Anonymous', 0);
     }
 
     public function run(): void
@@ -59,6 +62,9 @@ class LanguageGame
 
         // TODO: generate a message for the user that can be shown
 
+        if (!empty($_POST['username'])) {
+            $this->player->setName($_POST['username']);
+        }
     }
 
     public function selectRandomWord()

@@ -9,10 +9,13 @@
 </head>
 
 <body>
-	<!-- <form action="" method="POST">
+	<form action="" method="POST">
 		<label for="username">Enter your name</label>
 		<input id="username" type="text" name="username">
-	</form> -->
+	</form>
+	<p>Hello <?= $game->player->name ?></p>
+	<p>Score: <?= $game->player->score ?></p>
+	<hr>
 
 	<p>Word to translate:</p>
 	<p class="word-to-translate"><?= $game->getWordToTranslate() ?></p>
