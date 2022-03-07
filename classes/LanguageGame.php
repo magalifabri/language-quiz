@@ -64,6 +64,8 @@ class LanguageGame
                     . '<b><i>' . $givenAnswer . '</i></b>' . ' (FR) is not ' . '<b><i>' . $selectedWord->word . '</i></b>' . ' (EN).'
                     . '<br>'
                     . 'Try again.';
+
+                $this->player->errors = $this->player->errors + 1;
             }
         }
 

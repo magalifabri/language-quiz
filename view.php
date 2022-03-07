@@ -15,6 +15,7 @@
 	</form>
 	<p>Hello <?= $game->player->name ?></p>
 	<p>Score: <?= $game->player->score ?></p>
+	<p>Errors: <?= $game->player->errors ?></p>
 	<hr>
 
 	<p>Word to translate:</p>
