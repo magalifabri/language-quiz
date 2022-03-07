@@ -1,7 +1,5 @@
 <?php
 
-// session_start();
-
 class LanguageGame
 {
     private array $words;
@@ -121,5 +119,6 @@ class LanguageGame
         $this->selectRandomWord();
         $this->player->score = 0;
         $this->player->errors = 0;
+        $this->player->setName('Anonymous');
     }
 }

@@ -13,7 +13,12 @@
 
 <body>
 
-	<?php if ($game->gameState === 1) : ?>
+	<?php if ($game->player->name === 'Anonymous 👤') : ?>
+		<form action="" method="POST">
+			<label for="username">Enter your name</label>
+			<input id="username" type="text" name="username">
+		</form>
+	<?php elseif ($game->gameState === 1) : ?>
 		<div class="win">
 			<p>you win</p>
 			<p>Score: <?= $game->player->score ?></p>
@@ -33,10 +38,6 @@
 		</div>
 	<?php else : ?>
 
-		<form action="" method="POST">
-			<label for="username">Enter your name</label>
-			<input id="username" type="text" name="username">
-		</form>
 		<p>Hello <?= $game->player->name ?></p>
 		<p>Score: <?= $game->player->score ?></p>
 		<p>Errors: <?= $game->player->errors ?></p>
