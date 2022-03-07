@@ -14,53 +14,64 @@
 <body>
 
 	<?php if ($game->player->name === 'Anonymous 👤') : ?>
-		<form action="" method="POST">
-			<label for="username">Enter your name</label>
-			<input id="username" type="text" name="username">
-		</form>
+		<div class="username-form full-vp">
+			<form action="" method="POST" class="username">
+				<label for="username">Enter your name</label>
+				<input id="username" type="text" name="username">
+			</form>
+		</div>
 	<?php elseif ($game->gameState === 1) : ?>
-		<div class="win">
+		<div class="win full-vp">
 			<p>you win</p>
-			<p>Score: <?= $game->player->score ?></p>
-			<p>Errors: <?= $game->player->errors ?></p>
+			<div>
+				<p>Score: <?= $game->player->score ?></p>
+				<p>Errors: <?= $game->player->errors ?></p>
+			</div>
 			<form action="" method="POST">
 				<button name="reset">play again</button>
 			</form>
 		</div>
 	<?php elseif ($game->gameState === -1) : ?>
-		<div class="loose">
+		<div class="loose full-vp">
 			<p>you loose</p>
-			<p>Score: <?= $game->player->score ?></p>
-			<p>Errors: <?= $game->player->errors ?></p>
+			<div>
+				<p>Score: <?= $game->player->score ?></p>
+				<p>Errors: <?= $game->player->errors ?></p>
+			</div>
 			<form action="" method="POST">
 				<button name="reset">play again</button>
 			</form>
 		</div>
 	<?php else : ?>
+		<div class="top-bar">
+			<p>Hello <?= $game->player->name ?></p>
+			<p>Score: <?= $game->player->score ?> √ - <?= $game->player->errors ?> ×</p>
+		</div>
 
-		<p>Hello <?= $game->player->name ?></p>
-		<p>Score: <?= $game->player->score ?></p>
-		<p>Errors: <?= $game->player->errors ?></p>
 		<hr>
 
-		<p>Word to translate:</p>
-		<p class="word-to-translate" style="font-weight: bold"><?= $game->getWordToTranslate() ?></p>
-		<form action="" method="POST">
-			<button name="pass">pass</button>
-		</form>
-		<!-- TODO: add a form for the user to play the game -->
-		<form action="" method="POST">
-			<label for="word">enter word</label>
-			<input id="word" type="text" name="word">
-		</form>
+		<p class="translate-section-h">Translate: English to French</p>
+		<div class="translate-section">
+			<p class="word-to-translate" style="font-weight: bold"><?= $game->getWordToTranslate() ?></p>
+			<form action="" method="POST">
+				<input id="word" type="text" name="word">
+			</form>
+		</div>
 
 		<?php if (!empty($game->userFeedback)) : ?>
-			<p><?= $game->userFeedback ?></p>
+			<p class="user-feedback"><?= $game->userFeedback ?></p>
 		<?php endif ?>
 
-		<form action="" method="POST">
-			<button name="reset">reset</button>
-		</form>
+		<div class="buttons">
+			<form action="" method="POST">
+				<button name="pass">pass</button>
+			</form>
+
+
+			<form action="" method="POST">
+				<button name="reset">reset</button>
+			</form>
+		</div>
 
 	<?php endif ?>
 

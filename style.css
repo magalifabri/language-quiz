@@ -1,17 +1,60 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
+body {
+    min-width: 100vw;
+    min-height: 100vh;
+}
 
-.win,
-.loose {
-    position: absolute;
+.full-vp {
     width: 100vw;
     height: 100vh;
-    z-index: 1;
+    display: grid;
+    place-items: center;
+    padding: 20vh 0;
+}
+
+p,
+button,
+input,
+label {
+    margin: 1rem;
+    display: block;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.translate-section-h {
+    text-align: center;
+}
+
+.translate-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-feedback {
+    text-align: center;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .win {
-    background-color: green;
+    /* background-color: green; */
 }
 
 .loose {
-    background-color: red;
+    /* background-color: red; */
 }
