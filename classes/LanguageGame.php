@@ -1,5 +1,9 @@
 <?php
 
+define('CORRECT', 1);
+define('INCORRECT', 2);
+define('GOOD_ENOUGH', 3);
+
 class LanguageGame
 {
     private array $words;
@@ -55,26 +59,42 @@ class LanguageGame
 
             $correct = $selectedWord->verify($givenAnswer);
 
-            if ($correct) {
+            if ($correct === CORRECT) {
                 $this->userFeedback =
                     'Correct!'
                     . '<br>'
                     . '<b><i>' . $givenAnswer . '</i></b>' . ' (FR) is ' . '<b><i>' . $selectedWord->word . '</i></b>' . ' (EN).'
+                    . '<br>'
                     . '<br>'
                     . 'New word selected.';
 
                 $this->selectRandomWord();
 
                 $this->player->score = $this->player->score + 1;
-            } else {
+            } elseif ($correct === INCORRECT) {
                 $this->userFeedback =
                     'Wrong!'
                     . '<br>'
                     . '<b><i>' . $givenAnswer . '</i></b>' . ' (FR) is not ' . '<b><i>' . $selectedWord->word . '</i></b>' . ' (EN).'
                     . '<br>'
+                    . '<br>'
                     . 'Try again.';
 
                 $this->player->errors = $this->player->errors + 1;
+            } else {
+                $this->userFeedback =
+                    'Good enough!'
+                    . '<br>'
+                    . 'Your answer: <b><i>' . $givenAnswer . '</i></b>'
+                    . '<br>'
+                    . '<b><i>' . $selectedWord->answer . '</i></b> (FR) is ' . '<b><i>' . $selectedWord->word . '</i></b>' . ' (EN).'
+                    . '<br>'
+                    . '<br>'
+                    . 'New word selected.';
+
+                $this->selectRandomWord();
+
+                $this->player->score = $this->player->score + 1;
             }
         }
 
