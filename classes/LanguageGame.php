@@ -56,7 +56,7 @@ class LanguageGame
 
                 $this->selectRandomWord();
 
-                $_SESSION['score'] = $_SESSION['score'] + 1;
+                $this->player->score = $this->player->score + 1;
             } else {
                 $this->userFeedback =
                     'Wrong!'
@@ -82,8 +82,11 @@ class LanguageGame
         // reset button
         if (array_key_exists('reset', $_POST)) {
             $this->selectRandomWord();
-            $_SESSION['score'] = 0;
+            $this->player->score = 0;
         }
+
+        // save user changes
+        $_SESSION['user'] = serialize($this->player);
     }
 
     public function selectRandomWord()
