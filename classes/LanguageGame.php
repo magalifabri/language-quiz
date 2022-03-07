@@ -31,28 +31,28 @@ class LanguageGame
 
         // Option B: user has just submitted an answer
         // TODO: verify the answer (use the verify function in the word class) - you'll need to get the used word from the array first
-        // if (!empty($_POST['word'])) {
-        //     $givenAnswer = $_POST['word'];
-        //     $selectedWord = $this->words[$_SESSION['wordIndex']];
+        if (!empty($_POST['word'])) {
+            $givenAnswer = $_POST['word'];
+            $selectedWord = $this->words[$_SESSION['wordIndex']];
 
-        //     $correct = $selectedWord->verify($givenAnswer);
+            $correct = $selectedWord->verify($givenAnswer);
 
-        //     if ($correct) {
-        //         echo 'Correct!'
-        //             . '<br>'
-        //             . '<b><i>' . $givenAnswer . '</i></b>' . ' (FR) is ' . '<b><i>' . $selectedWord->word . '</i></b>' . ' (EN).'
-        //             . '<br>'
-        //             . 'New word selected.';
+            if ($correct) {
+                echo 'Correct!'
+                    . '<br>'
+                    . '<b><i>' . $givenAnswer . '</i></b>' . ' (FR) is ' . '<b><i>' . $selectedWord->word . '</i></b>' . ' (EN).'
+                    . '<br>'
+                    . 'New word selected.';
 
-        //         $this->selectRandomWord();
-        //     } else {
-        //         echo 'Wrong!'
-        //             . '<br>'
-        //             . '<b><i>' . $givenAnswer . '</i></b>' . ' (FR) is not ' . '<b><i>' . $selectedWord->word . '</i></b>' . ' (EN).'
-        //             . '<br>'
-        //             . 'Try again.';
-        //     }
-        // }
+                $this->selectRandomWord();
+            } else {
+                echo 'Wrong!'
+                    . '<br>'
+                    . '<b><i>' . $givenAnswer . '</i></b>' . ' (FR) is not ' . '<b><i>' . $selectedWord->word . '</i></b>' . ' (EN).'
+                    . '<br>'
+                    . 'Try again.';
+            }
+        }
 
         // TODO: generate a message for the user that can be shown
 
