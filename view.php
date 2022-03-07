@@ -9,6 +9,8 @@
 </head>
 
 <body>
+	<p>Word to translate:</p>
+	<p class="word-to-translate"><?= $game->getWordToTranslate() ?></p>
 	<!-- TODO: add a form for the user to play the game -->
 	<form action="" method="POST">
 		<label for="word">enter word</label>
