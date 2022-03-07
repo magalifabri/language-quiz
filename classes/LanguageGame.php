@@ -5,6 +5,7 @@ session_start();
 class LanguageGame
 {
     private array $words;
+    public string $userFeedback;
 
     public function __construct()
     {
@@ -38,7 +39,8 @@ class LanguageGame
             $correct = $selectedWord->verify($givenAnswer);
 
             if ($correct) {
-                echo 'Correct!'
+                $this->userFeedback =
+                    'Correct!'
                     . '<br>'
                     . '<b><i>' . $givenAnswer . '</i></b>' . ' (FR) is ' . '<b><i>' . $selectedWord->word . '</i></b>' . ' (EN).'
                     . '<br>'
@@ -46,7 +48,8 @@ class LanguageGame
 
                 $this->selectRandomWord();
             } else {
-                echo 'Wrong!'
+                $this->userFeedback =
+                    'Wrong!'
                     . '<br>'
                     . '<b><i>' . $givenAnswer . '</i></b>' . ' (FR) is not ' . '<b><i>' . $selectedWord->word . '</i></b>' . ' (EN).'
                     . '<br>'

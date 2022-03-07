@@ -9,6 +9,11 @@
 </head>
 
 <body>
+	<!-- <form action="" method="POST">
+		<label for="username">Enter your name</label>
+		<input id="username" type="text" name="username">
+	</form> -->
+
 	<p>Word to translate:</p>
 	<p class="word-to-translate"><?= $game->getWordToTranslate() ?></p>
 	<!-- TODO: add a form for the user to play the game -->
@@ -16,6 +21,10 @@
 		<label for="word">enter word</label>
 		<input id="word" type="text" name="word">
 	</form>
+
+	<?php if (!empty($game->userFeedback)) : ?>
+		<p><?= $game->userFeedback ?></p>
+	<?php endif ?>
 </body>
 
 </html>
