@@ -78,6 +78,12 @@ class LanguageGame
         if (array_key_exists('pass', $_POST)) {
             $this->selectRandomWord();
         }
+
+        // reset button
+        if (array_key_exists('reset', $_POST)) {
+            $this->selectRandomWord();
+            $_SESSION['score'] = 0;
+        }
     }
 
     public function selectRandomWord()

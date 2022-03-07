@@ -31,6 +31,10 @@
 	<?php if (!empty($game->userFeedback)) : ?>
 		<p><?= $game->userFeedback ?></p>
 	<?php endif ?>
+
+	<form action="" method="POST">
+		<button name="reset">reset</button>
+	</form>
 </body>
 
 </html>
