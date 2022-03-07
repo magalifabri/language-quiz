@@ -15,13 +15,24 @@ class Word
     public function verify(string $answer): bool
     {
         // TODO: use this function to verify if the provided answer by the user matches the correct one
-        if ($answer === $this->answer) {
+        // Bonus: allow answers with different casing (example: both bread or Bread can be correct answers, even though technically it's a different string)
+        if (strtolower($answer) === strtolower($this->answer)) {
             return true;
         } else {
-            return false;
+            $lengthDif = strlen($answer) - strlen($this->answer);
+            $errorMargin = strlen($this->answer) - similar_text(strtolower($answer), strtolower($this->answer));
+
+            if (
+                ($lengthDif === -1 && $errorMargin === 1)
+                || ($lengthDif === 0 && $errorMargin === 1)
+                || ($lengthDif === 1 && $errorMargin === 0)
+            ) {
+                return true;
+            } else {
+                return false;
+            }
         }
 
-        // Bonus: allow answers with different casing (example: both bread or Bread can be correct answers, even though technically it's a different string)
         // Bonus (hard): can you allow answers with small typo's (max one character different)?
     }
 }
