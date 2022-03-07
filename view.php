@@ -5,10 +5,30 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<link rel="stylesheet" href="./style.css">
+
 	<title>Game</title>
 </head>
 
 <body>
+
+	<?php if ($game->gameState === 1) : ?>
+		<div class="win">
+			<p>you win</p>
+			<form action="" method="POST">
+				<button name="reset">play again</button>
+			</form>
+		</div>
+	<?php elseif ($game->gameState === -1) : ?>
+		<div class="loose">
+			<p>you loose</p>
+			<form action="" method="POST">
+				<button name="reset">play again</button>
+			</form>
+		</div>
+	<?php endif ?>
+
 	<form action="" method="POST">
 		<label for="username">Enter your name</label>
 		<input id="username" type="text" name="username">
@@ -36,6 +56,7 @@
 	<form action="" method="POST">
 		<button name="reset">reset</button>
 	</form>
+
 </body>
 
 </html>

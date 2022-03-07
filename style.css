@@ -1,0 +1,17 @@
+
+
+.win,
+.loose {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+.win {
+    background-color: green;
+}
+
+.loose {
+    background-color: red;
+}

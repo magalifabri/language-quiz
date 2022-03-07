@@ -7,10 +7,12 @@ class LanguageGame
     private array $words;
     public string $userFeedback;
     public Player $player;
+    public int $gameState;
 
     public function __construct()
     {
         $this->words = [];
+        $this->gameState = 0;
 
         // :: is used for static functions
         // They can be called without an instance of that class being created
@@ -83,8 +85,14 @@ class LanguageGame
 
         // reset button
         if (array_key_exists('reset', $_POST)) {
-            $this->selectRandomWord();
-            $this->player->score = 0;
+            $this->reset();
+        }
+
+        // win / loose trigger
+        if ($this->player->score === 10) {
+            $this->gameState = 1;
+        } elseif ($this->player->errors === 10) {
+            $this->gameState = -1;
         }
 
         // save user changes
@@ -99,5 +107,12 @@ class LanguageGame
     public function getWordToTranslate()
     {
         return $this->words[$_SESSION['wordIndex']]->word;
+    }
+
+    private function reset()
+    {
+        $this->selectRandomWord();
+        $this->player->score = 0;
+        $this->player->errors = 0;
     }
 }
