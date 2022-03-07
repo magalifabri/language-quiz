@@ -16,7 +16,6 @@ class Player
     public function setName($name)
     {
         $this->name = $name . ' 👤';
-        $_SESSION['username'] = $this->name;
         $this->score = 0;
     }
 }

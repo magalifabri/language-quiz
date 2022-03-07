@@ -20,7 +20,7 @@ class LanguageGame
             array_push($this->words, new Word($englishTranslation, $frenchTranslation));
         }
 
-        if (empty($_SESSION['username'])) {
+        if (empty($_SESSION['user'])) {
             $this->player = new Player('Anonymous', 0);
             $_SESSION['user'] = serialize($this->player);
         } else {
