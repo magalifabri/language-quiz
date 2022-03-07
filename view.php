@@ -18,7 +18,10 @@
 	<hr>
 
 	<p>Word to translate:</p>
-	<p class="word-to-translate"><?= $game->getWordToTranslate() ?></p>
+	<p class="word-to-translate" style="font-weight: bold"><?= $game->getWordToTranslate() ?></p>
+	<form action="" method="POST">
+		<button name="pass">pass</button>
+	</form>
 	<!-- TODO: add a form for the user to play the game -->
 	<form action="" method="POST">
 		<label for="word">enter word</label>

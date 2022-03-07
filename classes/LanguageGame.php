@@ -73,6 +73,11 @@ class LanguageGame
         if (!empty($_POST['username'])) {
             $this->player->setName($_POST['username']);
         }
+
+        // pass button: give new word
+        if (array_key_exists('pass', $_POST)) {
+            $this->selectRandomWord();
+        }
     }
 
     public function selectRandomWord()
