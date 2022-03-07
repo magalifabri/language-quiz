@@ -32,6 +32,16 @@ class LanguageGame
 
     public function run(): void
     {
+        // reset button
+        if (array_key_exists('reset', $_POST)) {
+            $this->reset();
+        }
+
+        // check if game is running
+        if ($this->gameState !== 0) {
+            return;
+        }
+
         // TODO: check for option A or B
 
         // Option A: user visits site first time (or wants a new word)
@@ -83,16 +93,13 @@ class LanguageGame
             $this->selectRandomWord();
         }
 
-        // reset button
-        if (array_key_exists('reset', $_POST)) {
-            $this->reset();
-        }
-
         // win / loose trigger
-        if ($this->player->score === 10) {
+        if ($this->player->score >= 10) {
             $this->gameState = 1;
-        } elseif ($this->player->errors === 10) {
+            return;
+        } elseif ($this->player->errors >= 10) {
             $this->gameState = -1;
+            return;
         }
 
         // save user changes
