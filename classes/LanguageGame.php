@@ -23,9 +23,9 @@ class LanguageGame
         // (re)create player
         if (empty($_SESSION['user'])) {
             $this->player = new Player('Anonymous', 0);
-            $_SESSION['user'] = serialize($this->player);
+            $_SESSION['user'] = $this->player;
         } else {
-            $this->player = unserialize($_SESSION['user']);
+            $this->player = $_SESSION['user'];
         }
     }
 
@@ -112,7 +112,7 @@ class LanguageGame
         }
 
         // save player state
-        $_SESSION['user'] = serialize($this->player);
+        $_SESSION['user'] = $this->player;
     }
 
     public function selectRandomWord()
