@@ -2,6 +2,10 @@
 
 class Word
 {
+    const CORRECT = 1;
+    const INCORRECT = 2;
+    const GOOD_ENOUGH = 3;
+
     // TODO: add word (FR) and answer (EN) - (via constructor or not? why?)
     public string $word;
     public string $answer;
@@ -19,7 +23,7 @@ class Word
         // Bonus (hard): can you allow answers with small typo's (max one character different)?
 
         if (strtolower($answer) === strtolower($this->answer)) {
-            return CORRECT;
+            return self::CORRECT;
         } else {
             $lengthDif = strlen($answer) - strlen($this->answer);
             $errorMargin = strlen($this->answer) - similar_text(strtolower($answer), strtolower($this->answer));
@@ -29,9 +33,9 @@ class Word
                 || ($lengthDif === 0 && $errorMargin === 1)
                 || ($lengthDif === 1 && $errorMargin === 0)
             ) {
-                return GOOD_ENOUGH;
+                return self::GOOD_ENOUGH;
             } else {
-                return INCORRECT;
+                return self::INCORRECT;
             }
         }
     }

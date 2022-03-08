@@ -1,9 +1,5 @@
 <?php
 
-define('CORRECT', 1);
-define('INCORRECT', 2);
-define('GOOD_ENOUGH', 3);
-
 class LanguageGame
 {
     private array $words;
@@ -64,9 +60,9 @@ class LanguageGame
 
             $verificationStatus = $selectedWord->verify($givenAnswer);
 
-            if ($verificationStatus === CORRECT) {
+            if ($verificationStatus === Word::CORRECT) {
                 $this->handleCorrectTranslation($givenAnswer, $selectedWord);
-            } elseif ($verificationStatus === INCORRECT) {
+            } elseif ($verificationStatus === Word::INCORRECT) {
                 $this->handleIncorrectTranslation($givenAnswer, $selectedWord);
             } else {
                 $this->handleGoodEnoughTranslation($givenAnswer, $selectedWord);
