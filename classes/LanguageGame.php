@@ -5,11 +5,15 @@ class LanguageGame
     private array $words;
     public string $verificationStatusMsg;
     public Player $player;
+
     public int $gameState;
+    const RUNNING = 1;
+    const WIN = 2;
+    const LOOSE = 3;
 
     public function __construct()
     {
-        $this->gameState = 0;
+        $this->gameState = self::RUNNING;
         $this->initWords();
         $this->initPlayer();
     }
@@ -38,8 +42,8 @@ class LanguageGame
             $this->reset();
         }
 
-        // only continue if game is running
-        if ($this->gameState !== 0) {
+        // check game state
+        if (($this->gameState = $this->setGameState()) !== self::RUNNING) {
             return;
         }
 
@@ -74,17 +78,24 @@ class LanguageGame
             $this->selectRandomWord();
         }
 
-        // check win / loose conditions
-        if ($this->player->score >= 10) {
-            $this->gameState = 1;
-            return;
-        } elseif ($this->player->errors >= 10) {
-            $this->gameState = -1;
+        // check game state
+        if (($this->gameState = $this->setGameState()) !== self::RUNNING) {
             return;
         }
 
         // save player state
         $_SESSION['user'] = $this->player;
+    }
+
+    private function setGameState(): int
+    {
+        if ($this->player->score === 10) {
+            return self::WIN;
+        } elseif ($this->player->errors === 10) {
+            return self::LOOSE;
+        } else {
+            return self::RUNNING;
+        }
     }
 
     private function handleCorrectTranslation($givenAnswer, $selectedWord)

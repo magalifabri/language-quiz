@@ -19,7 +19,7 @@
 				<input id="username" type="text" name="username" placeholder="username" autocomplete="off">
 			</form>
 		</div>
-	<?php elseif ($game->gameState === 1) : ?>
+	<?php elseif ($game->gameState === $game::WIN) : ?>
 		<div class="win full-vp">
 			<p>you win</p>
 			<div>
@@ -30,7 +30,7 @@
 				<button name="reset">play again</button>
 			</form>
 		</div>
-	<?php elseif ($game->gameState === -1) : ?>
+	<?php elseif ($game->gameState === $game::LOOSE) : ?>
 		<div class="loose full-vp">
 			<p>you loose</p>
 			<div>
