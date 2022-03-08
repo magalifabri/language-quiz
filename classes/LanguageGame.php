@@ -62,44 +62,14 @@ class LanguageGame
             $givenAnswer = $_POST['word'];
             $selectedWord = $this->words[$_SESSION['wordIndex']];
 
-            $correct = $selectedWord->verify($givenAnswer);
+            $verificationStatus = $selectedWord->verify($givenAnswer);
 
-            if ($correct === CORRECT) {
-                $this->userFeedback =
-                    'Correct!'
-                    . '<br>'
-                    . '<b><i>' . $givenAnswer . '</i></b>' . ' (FR) is ' . '<b><i>' . $selectedWord->word . '</i></b>' . ' (EN).'
-                    . '<br>'
-                    . '<br>'
-                    . 'New word selected.';
-
-                $this->selectRandomWord();
-
-                $this->player->score = $this->player->score + 1;
-            } elseif ($correct === INCORRECT) {
-                $this->userFeedback =
-                    'Wrong!'
-                    . '<br>'
-                    . '<b><i>' . $givenAnswer . '</i></b>' . ' (FR) is not ' . '<b><i>' . $selectedWord->word . '</i></b>' . ' (EN).'
-                    . '<br>'
-                    . '<br>'
-                    . 'Try again.';
-
-                $this->player->errors = $this->player->errors + 1;
+            if ($verificationStatus === CORRECT) {
+                $this->handleCorrectTranslation($givenAnswer, $selectedWord);
+            } elseif ($verificationStatus === INCORRECT) {
+                $this->handleIncorrectTranslation($givenAnswer, $selectedWord);
             } else {
-                $this->userFeedback =
-                    'Good enough!'
-                    . '<br>'
-                    . 'Your answer: <b><i>' . $givenAnswer . '</i></b>.'
-                    . '<br>'
-                    . '<b><i>' . $selectedWord->answer . '</i></b> (FR) is ' . '<b><i>' . $selectedWord->word . '</i></b>' . ' (EN).'
-                    . '<br>'
-                    . '<br>'
-                    . 'New word selected.';
-
-                $this->selectRandomWord();
-
-                $this->player->score = $this->player->score + 1;
+                $this->handleGoodEnoughTranslation($givenAnswer, $selectedWord);
             }
         }
 
@@ -119,6 +89,54 @@ class LanguageGame
 
         // save player state
         $_SESSION['user'] = $this->player;
+    }
+
+    private function handleCorrectTranslation($givenAnswer, $selectedWord)
+    {
+        $this->userFeedback =
+            'Correct!'
+            . '<br>'
+            . '<br>'
+            . '<b><i>' . $givenAnswer . '</i></b>' . ' (FR) is ' . '<b><i>' . $selectedWord->word . '</i></b>' . ' (EN).'
+            . '<br>'
+            . '<br>'
+            . 'New word selected.';
+
+        $this->selectRandomWord();
+
+        $this->player->score = $this->player->score + 1;
+    }
+
+    private function handleIncorrectTranslation($givenAnswer, $selectedWord)
+    {
+        $this->userFeedback =
+            'Wrong!'
+            . '<br>'
+            . '<br>'
+            . '<b><i>' . $givenAnswer . '</i></b>' . ' (FR) is not ' . '<b><i>' . $selectedWord->word . '</i></b>' . ' (EN).'
+            . '<br>'
+            . '<br>'
+            . 'Try again.';
+
+        $this->player->errors = $this->player->errors + 1;
+    }
+
+    private function handleGoodEnoughTranslation($givenAnswer, $selectedWord)
+    {
+        $this->userFeedback =
+            'Good enough!'
+            . '<br>'
+            . '<br>'
+            . 'Your answer: <b><i>' . $givenAnswer . '</i></b>.'
+            . '<br>'
+            . 'Correct answer: <b><i>' . $selectedWord->answer . '</i></b> (FR) is ' . '<b><i>' . $selectedWord->word . '</i></b>' . ' (EN).'
+            . '<br>'
+            . '<br>'
+            . 'New word selected.';
+
+        $this->selectRandomWord();
+
+        $this->player->score = $this->player->score + 1;
     }
 
     public function selectRandomWord()
