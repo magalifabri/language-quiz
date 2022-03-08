@@ -14,13 +14,19 @@ class LanguageGame
     public function __construct()
     {
         $this->gameState = 0;
+        $this->initWords();
+        $this->initPlayer();
+    }
 
-        // fill $words
+    private function initWords()
+    {
         foreach (Data::words() as $frenchTranslation => $englishTranslation) {
             $this->words[] = new Word($englishTranslation, $frenchTranslation);
         }
+    }
 
-        // (re)create player
+    private function initPlayer()
+    {
         if (empty($_SESSION['user'])) {
             $this->player = new Player('Anonymous', 0);
             $_SESSION['user'] = $this->player;
