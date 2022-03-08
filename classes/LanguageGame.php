@@ -53,7 +53,7 @@ class LanguageGame
         }
 
         // select random word
-        if (empty($_SESSION['wordIndex'])) {
+        if (!isset($_SESSION['wordIndex'])) {
             $this->selectRandomWord();
         }
 
@@ -141,7 +141,7 @@ class LanguageGame
 
     public function selectRandomWord()
     {
-        $_SESSION['wordIndex'] = rand(0, count($this->words) - 1);
+        $_SESSION['wordIndex'] = array_rand($this->words);
     }
 
     public function getWordToTranslate()
