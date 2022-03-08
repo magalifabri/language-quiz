@@ -19,23 +19,16 @@
 				<input id="username" type="text" name="username" placeholder="username" autocomplete="off">
 			</form>
 		</div>
-	<?php elseif ($game->gameState === $game::WIN) : ?>
-		<div class="win full-vp">
-			<p>you win</p>
+	<?php elseif ($game->gameState !== $game::RUNNING) : ?>
+		<div class="full-vp">
+			<?php if ($game->gameState === $game::WIN) : ?>
+				<p class="end-condition">you win</p>
+			<?php else : ?>
+				<p class="end-condition">you lose</p>
+			<?php endif ?>
 			<div>
-				<p>Score: <?= $game->player->score ?></p>
-				<p>Errors: <?= $game->player->errors ?></p>
-			</div>
-			<form action="" method="POST">
-				<button name="reset">play again</button>
-			</form>
-		</div>
-	<?php elseif ($game->gameState === $game::LOOSE) : ?>
-		<div class="loose full-vp">
-			<p>you loose</p>
-			<div>
-				<p>Score: <?= $game->player->score ?></p>
-				<p>Errors: <?= $game->player->errors ?></p>
+				<p><?= $game->player->score ?> √</p>
+				<p><?= $game->player->errors ?> ×</p>
 			</div>
 			<form action="" method="POST">
 				<button name="reset">play again</button>
