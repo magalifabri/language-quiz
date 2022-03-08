@@ -20,8 +20,8 @@ body {
     font-size: 1.2rem;
 }
 
-.word-to-translate,
-input {
+input,
+.word-to-translate span {
     font-size: 1.5rem;
 }
 
@@ -35,8 +35,7 @@ input {
 
 p,
 button,
-input,
-label {
+form {
     margin: 1rem;
     display: block;
 
@@ -57,14 +56,15 @@ button {
     align-items: center;
 }
 
-.translate-section-h {
-    text-align: center;
-}
-
 .translate-section {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.translate-section input {
+    padding: .5rem 1rem;
 }
 
 .user-feedback {

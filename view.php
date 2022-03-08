@@ -45,16 +45,17 @@
 	<?php else : ?>
 		<div class="top-bar">
 			<p>Hello <?= $game->player->name ?></p>
-			<p>Score: <?= $game->player->score ?> √ - <?= $game->player->errors ?> ×</p>
+			<p><?= $game->player->score ?> √ - <?= $game->player->errors ?> ×</p>
 		</div>
 
 		<hr>
 
-		<p class="translate-section-h">Translate: English to French</p>
+		<!-- <p class="translate-section-h">Translate: English to French</p> -->
 		<div class="translate-section">
-			<p class="word-to-translate" style="font-weight: bold"><?= $game->getWordToTranslate() ?></p>
+			<p class="word-to-translate">English: <span><?= $game->getWordToTranslate() ?></span></p>
 			<form action="" method="POST">
-				<input id="word" type="text" name="word">
+				<label for="word">French: </label>
+				<input id="word" type="text" name="word" placeholder="enter translation">
 			</form>
 		</div>
 

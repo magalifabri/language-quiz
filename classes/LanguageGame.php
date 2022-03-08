@@ -85,7 +85,7 @@ class LanguageGame
                 $this->userFeedback =
                     'Good enough!'
                     . '<br>'
-                    . 'Your answer: <b><i>' . $givenAnswer . '</i></b>'
+                    . 'Your answer: <b><i>' . $givenAnswer . '</i></b>.'
                     . '<br>'
                     . '<b><i>' . $selectedWord->answer . '</i></b> (FR) is ' . '<b><i>' . $selectedWord->word . '</i></b>' . ' (EN).'
                     . '<br>'
