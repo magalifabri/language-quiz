@@ -18,6 +18,7 @@ font-family: 'Roboto Serif', serif;
 }
 
 body {
+    min-width: 300px;
     width: 100vw;
     min-height: 100vh;
 
@@ -70,6 +71,7 @@ button:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 input,
@@ -98,7 +100,7 @@ form.pass { grid-area: pass; }
     text-align: center;
 }
 
-.translation-input-form input {
+input {
     padding: .5rem 1rem;
     text-align: center;
     width: 100%;
@@ -107,6 +109,7 @@ form.pass { grid-area: pass; }
 
 ::placeholder {
     font-weight: 200;
+    font-size: 1rem;
 }
 
 

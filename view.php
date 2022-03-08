@@ -16,8 +16,7 @@
 	<?php if ($game->player->name === 'Anonymous 👤') : ?>
 		<div class="username-form full-vp">
 			<form action="" method="POST" class="username">
-				<label for="username">Enter your name</label>
-				<input id="username" type="text" name="username">
+				<input id="username" type="text" name="username" placeholder="username" autocomplete="off">
 			</form>
 		</div>
 	<?php elseif ($game->gameState === 1) : ?>
@@ -61,7 +60,7 @@
 			</form>
 			<p class="language to">French:</p>
 			<form action="" method="POST" class="translation-input-form">
-				<input id="word" type="text" name="word" placeholder="enter translation">
+				<input id="word" type="text" name="word" placeholder="translation" autocomplete="off">
 			</form>
 		</div>
 
