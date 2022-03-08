@@ -89,6 +89,8 @@ input,
         'language-from word pass'
         'language-to input . '
     ;
+    max-width: 500px;
+    margin: 0 auto;
 }
 .language.from { grid-area: language-from; }
 .word-to-translate { grid-area: word; }
