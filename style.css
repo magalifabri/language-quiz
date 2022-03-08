@@ -12,6 +12,11 @@ font-family: 'Roboto Serif', serif;
     padding: 0;
 }
 
+:root {
+    --whiteish: rgb(250, 249, 246);
+    --blackish: rgb(39, 39, 39);
+}
+
 body {
     min-width: 100vw;
     min-height: 100vh;
@@ -19,6 +24,9 @@ body {
     font-family: 'Roboto', sans-serif;
     font-size: 1.2rem;
     font-weight: 300;
+
+    background-color: var(--whiteish);
+    color: var(--blackish);
 }
 
 p {
@@ -35,6 +43,17 @@ button {
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 1rem;
     text-transform: uppercase;
+
+    background-color: white;
+    color: var(--blackish);
+    border: 1px solid var(--blackish);
+    border-radius: 3px;
+
+    transition: all .2s ease;
+}
+button:hover {
+    color: white;
+    background-color: var(--blackish);
 }
 
 
@@ -57,6 +76,7 @@ input,
 .word-to-translate {
     font-size: 1.5rem;
 }
+
 
 
 .from,
