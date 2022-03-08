@@ -18,12 +18,26 @@ body {
 
     font-family: 'Roboto', sans-serif;
     font-size: 1.2rem;
+    font-weight: 300;
 }
 
-input,
-.word-to-translate span {
-    font-size: 1.5rem;
+p {
+    margin: 1rem;
+    display: block;
+
+    font-family: 'Roboto', sans-serif;
 }
+
+button {
+    margin: 1rem;
+    padding: .25em .75em;
+
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+
 
 .full-vp {
     width: 100vw;
@@ -33,48 +47,44 @@ input,
     padding: 20vh 0;
 }
 
-p,
-button,
-form {
-    margin: 1rem;
-    display: block;
-
-    font-family: 'Roboto', sans-serif;
-}
-
-button {
-    padding: .5rem 1rem;
-
-    font-family: 'Roboto Condensed', sans-serif;
-    font-size: 1.2rem;
-    text-transform: uppercase;
-}
-
 .top-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.translate-section {
+input,
+.word-to-translate {
+    font-size: 1.5rem;
+}
+
+
+.from,
+.to {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
 }
 
-.translate-section input {
-    padding: .5rem 1rem;
-}
-
-.user-feedback {
+.word-to-translate {
+    flex: 1 0 auto;
     text-align: center;
 }
 
-.buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.translation-input-form {
+    flex: 1 0 auto;
+    text-align: center;
+}
+
+.translation-input-form input {
+    padding: .5rem 1rem;
+    text-align: center;
+}
+
+
+
+.user-feedback {
+    text-align: center;
 }
 
 .win {
