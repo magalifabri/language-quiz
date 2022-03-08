@@ -64,8 +64,10 @@
 			</form>
 		</div>
 
-		<?php if (!empty($game->userFeedback)) : ?>
-			<p class="user-feedback"><?= $game->userFeedback ?></p>
+		<?php if (!empty($game->verificationStatusMsg)) : ?>
+			<div class="verificationStatusMsg">
+				<?= $game->verificationStatusMsg ?>
+			</div>
 		<?php endif ?>
 
 	<?php endif ?>

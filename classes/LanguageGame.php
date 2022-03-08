@@ -7,7 +7,7 @@ define('GOOD_ENOUGH', 3);
 class LanguageGame
 {
     private array $words;
-    public string $userFeedback;
+    public string $verificationStatusMsg;
     public Player $player;
     public int $gameState;
 
@@ -93,14 +93,12 @@ class LanguageGame
 
     private function handleCorrectTranslation($givenAnswer, $selectedWord)
     {
-        $this->userFeedback =
-            'Correct!'
-            . '<br>'
-            . '<br>'
-            . '<b><i>' . $givenAnswer . '</i></b>' . ' (FR) is ' . '<b><i>' . $selectedWord->word . '</i></b>' . ' (EN).'
-            . '<br>'
-            . '<br>'
-            . 'New word selected.';
+        $this->verificationStatusMsg =
+            "
+                <p>Correct!</p>
+                <p><b><i> $givenAnswer </i></b> (FR) is <b><i> $selectedWord->word </i></b> (EN)</p>
+                <p>New word selected</p>
+            ";
 
         $this->selectRandomWord();
 
@@ -109,30 +107,25 @@ class LanguageGame
 
     private function handleIncorrectTranslation($givenAnswer, $selectedWord)
     {
-        $this->userFeedback =
-            'Wrong!'
-            . '<br>'
-            . '<br>'
-            . '<b><i>' . $givenAnswer . '</i></b>' . ' (FR) is not ' . '<b><i>' . $selectedWord->word . '</i></b>' . ' (EN).'
-            . '<br>'
-            . '<br>'
-            . 'Try again.';
+        $this->verificationStatusMsg =
+            "
+                <p>Ehhh!</p>
+                <p><b><i> $givenAnswer </i></b> (FR) is NOT <b><i> $selectedWord->word </i></b> (EN)</p>
+                <p>Try again!</p>
+            ";
 
         $this->player->errors = $this->player->errors + 1;
     }
 
     private function handleGoodEnoughTranslation($givenAnswer, $selectedWord)
     {
-        $this->userFeedback =
-            'Good enough!'
-            . '<br>'
-            . '<br>'
-            . 'Your answer: <b><i>' . $givenAnswer . '</i></b>.'
-            . '<br>'
-            . 'Correct answer: <b><i>' . $selectedWord->answer . '</i></b> (FR) is ' . '<b><i>' . $selectedWord->word . '</i></b>' . ' (EN).'
-            . '<br>'
-            . '<br>'
-            . 'New word selected.';
+        $this->verificationStatusMsg =
+            "
+                <p>Good enough</p>
+                <p>Your answer: <b><i> $givenAnswer </i></b>
+                <p>Correct answer: <b><i> $selectedWord->answer </i></b> (FR) is <b><i> $selectedWord->word </i></b> (EN)</p>
+                <p>New word selected</p>
+            ";
 
         $this->selectRandomWord();
 
