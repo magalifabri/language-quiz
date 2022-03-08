@@ -18,7 +18,7 @@ font-family: 'Roboto Serif', serif;
 }
 
 body {
-    min-width: 100vw;
+    width: 100vw;
     min-height: 100vh;
 
     font-family: 'Roboto', sans-serif;
@@ -75,42 +75,41 @@ button:hover {
 input,
 .word-to-translate {
     font-size: 1.5rem;
+    font-weight: 500;
 }
 
 
 
-.from,
-.to {
-    display: flex;
-    flex-direction: row;
+.grid {
+    display: grid;
     align-items: center;
+    grid-template-areas: 
+        'language-from word pass'
+        'language-to input . '
+    ;
 }
+.language.from { grid-area: language-from; }
+.word-to-translate { grid-area: word; }
+form.pass { grid-area: pass; }
+.language.to { grid-area: language-to; }
+.translation-input-form { grid-area: input; }
 
 .word-to-translate {
-    flex: 1 0 auto;
-    text-align: center;
-}
-
-.translation-input-form {
-    flex: 1 0 auto;
     text-align: center;
 }
 
 .translation-input-form input {
     padding: .5rem 1rem;
     text-align: center;
+    width: 100%;
+    font-family: 'Roboto Serif', serif;
 }
 
+::placeholder {
+    font-weight: 200;
+}
 
 
 .user-feedback {
     text-align: center;
-}
-
-.win {
-    /* background-color: green; */
-}
-
-.loose {
-    /* background-color: red; */
 }

@@ -53,16 +53,13 @@
 
 		<hr>
 
-		<div class="from">
-			<p class="language">English:</p>
+		<div class="grid">
+			<p class="language from">English:</p>
 			<p class="word-to-translate"><?= $game->getWordToTranslate() ?></p>
-			<form action="" method="POST">
+			<form action="" method="POST" class="pass">
 				<button name="pass">pass</button>
 			</form>
-		</div>
-
-		<div class="to">
-			<p class="language">French:</p>
+			<p class="language to">French:</p>
 			<form action="" method="POST" class="translation-input-form">
 				<input id="word" type="text" name="word" placeholder="enter translation">
 			</form>
