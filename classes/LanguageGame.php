@@ -15,14 +15,12 @@ class LanguageGame
     {
         $this->gameState = 0;
 
-        // :: is used for static functions
-        // They can be called without an instance of that class being created
-        // and are used mostly for more *static* types of data (a fixed set of translations in this case)
+        // fill $words
         foreach (Data::words() as $frenchTranslation => $englishTranslation) {
-            // TODO: create instances of the Word class to be added to the words array
             $this->words[] = new Word($englishTranslation, $frenchTranslation);
         }
 
+        // (re)create player
         if (empty($_SESSION['user'])) {
             $this->player = new Player('Anonymous', 0);
             $_SESSION['user'] = serialize($this->player);
@@ -33,26 +31,27 @@ class LanguageGame
 
     public function run(): void
     {
-        // reset button
+        // handle reset button
         if (array_key_exists('reset', $_POST)) {
             $this->reset();
         }
 
-        // check if game is running
+        // only continue if game is running
         if ($this->gameState !== 0) {
             return;
         }
 
-        // TODO: check for option A or B
+        // set username
+        if (!empty($_POST['username'])) {
+            $this->player->setName($_POST['username']);
+        }
 
-        // Option A: user visits site first time (or wants a new word)
-        // TODO: select a random word for the user to translate
+        // select random word
         if (empty($_SESSION['wordIndex'])) {
             $this->selectRandomWord();
         }
 
-        // Option B: user has just submitted an answer
-        // TODO: verify the answer (use the verify function in the word class) - you'll need to get the used word from the array first
+        // check user input
         if (!empty($_POST['word'])) {
             $givenAnswer = $_POST['word'];
             $selectedWord = $this->words[$_SESSION['wordIndex']];
@@ -98,19 +97,12 @@ class LanguageGame
             }
         }
 
-        // TODO: generate a message for the user that can be shown
-
-        // set username
-        if (!empty($_POST['username'])) {
-            $this->player->setName($_POST['username']);
-        }
-
-        // pass button: give new word
+        // handle pass button
         if (array_key_exists('pass', $_POST)) {
             $this->selectRandomWord();
         }
 
-        // win / loose trigger
+        // check win / loose conditions
         if ($this->player->score >= 10) {
             $this->gameState = 1;
             return;
@@ -119,7 +111,7 @@ class LanguageGame
             return;
         }
 
-        // save user changes
+        // save player state
         $_SESSION['user'] = serialize($this->player);
     }
 
