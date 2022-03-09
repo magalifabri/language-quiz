@@ -139,7 +139,16 @@ class LanguageGame
 
     public function selectRandomWord()
     {
-        $_SESSION['wordIndex'] = array_rand($this->words);
+        $currentWordIndex = $_SESSION['wordIndex'];
+
+        while (1) {
+            $newWordIndex = array_rand($this->words);
+            if ($newWordIndex != $currentWordIndex) {
+                break;
+            }
+        }
+
+        $_SESSION['wordIndex'] = $newWordIndex;
     }
 
     public function getWordToTranslate()
