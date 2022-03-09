@@ -6,6 +6,7 @@ class LanguageGame
     public string $verificationStatusMsg;
     public Player $player;
     public array $wordsTimesSelected;
+    // public int $newWord;
 
     public int $gameState;
     const RUNNING = 1;
@@ -163,14 +164,7 @@ class LanguageGame
         }
 
         $_SESSION['wordIndex'] = $newWordIndex;
-
-        if (!key_exists($newWordIndex, $this->wordsTimesSelected)) {
-            $this->wordsTimesSelected[$newWordIndex] = 1;
-        } else {
-            $timesRequested = $this->wordsTimesSelected[$newWordIndex];
-            $this->wordsTimesSelected[$newWordIndex] = $timesRequested + 1;
-        }
-
+        $this->wordsTimesSelected[$newWordIndex]++;
         $_SESSION['wordsTimesSelected'] = $this->wordsTimesSelected;
     }
 
@@ -181,7 +175,6 @@ class LanguageGame
 
     private function reset()
     {
-        // $this->selectRandomWord();
         $this->player->score = 0;
         $this->player->errors = 0;
         $this->player->setName('Anonymous');
