@@ -4,7 +4,7 @@ class Word
 {
     const CORRECT = 1;
     const INCORRECT = 2;
-    const GOOD_ENOUGH = 3;
+    const ALMOST = 3;
 
     public string $word;
     public string $answer;
@@ -28,7 +28,7 @@ class Word
                 || ($lengthDif === 0 && $errorMargin === 1)
                 || ($lengthDif === 1 && $errorMargin === 0)
             ) {
-                return self::GOOD_ENOUGH;
+                return self::ALMOST;
             } else {
                 return self::INCORRECT;
             }

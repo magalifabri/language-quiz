@@ -69,7 +69,7 @@ class LanguageGame
             } elseif ($verificationStatus === Word::INCORRECT) {
                 $this->handleIncorrectTranslation($givenAnswer, $selectedWord);
             } else {
-                $this->handleGoodEnoughTranslation($givenAnswer, $selectedWord);
+                $this->handleAlmostTranslation($givenAnswer, $selectedWord);
             }
         }
 
@@ -124,19 +124,17 @@ class LanguageGame
         $this->player->errors = $this->player->errors + 1;
     }
 
-    private function handleGoodEnoughTranslation($givenAnswer, $selectedWord)
+    private function handleAlmostTranslation($givenAnswer, $selectedWord)
     {
         $this->verificationStatusMsg =
             "
-                <p>Good enough</p>
-                <p>Your answer: <b><i> $givenAnswer </i></b>
-                <p>Correct answer: <b><i> $selectedWord->answer </i></b> (FR) is <b><i> $selectedWord->word </i></b> (EN)</p>
+                <p>Almost!</p>
+                <p><b><i> $selectedWord->answer </i></b> (FR) is <b><i> $selectedWord->word </i></b> (EN)</p>
+                <p>( Your answer: <i> $givenAnswer </i>)
                 <p>New word selected</p>
             ";
 
         $this->selectRandomWord();
-
-        $this->player->score = $this->player->score + 1;
     }
 
     public function selectRandomWord()
