@@ -5,6 +5,7 @@ class LanguageGame
     private array $words;
     public string $verificationStatusMsg;
     public Player $player;
+    public array $wordsTimesSelected;
 
     public int $gameState;
     const RUNNING = 1;
@@ -16,6 +17,14 @@ class LanguageGame
         $this->gameState = self::RUNNING;
         $this->initWords();
         $this->initPlayer();
+
+        if (!empty($_SESSION['wordsTimesSelected'])) {
+            $this->wordsTimesSelected = $_SESSION['wordsTimesSelected'];
+        } else {
+            for ($i = 0; $i < count($this->words); $i++) {
+                $this->wordsTimesSelected[$i] = 0;
+            }
+        }
     }
 
     private function initWords()
@@ -37,19 +46,24 @@ class LanguageGame
 
     public function run(): void
     {
+        // check if username has been given
+        if ($this->player->name === 'Anonymous 👤') {
+            if (!empty($_POST['username'])) {
+                $this->player->setName($_POST['username']);
+            } else {
+                return;
+            }
+        }
+
         // handle reset button
         if (array_key_exists('reset', $_POST)) {
             $this->reset();
+            return;
         }
 
         // check game state
         if (($this->gameState = $this->setGameState()) !== self::RUNNING) {
             return;
-        }
-
-        // set username
-        if (!empty($_POST['username'])) {
-            $this->player->setName($_POST['username']);
         }
 
         // select random word
@@ -139,7 +153,7 @@ class LanguageGame
 
     public function selectRandomWord()
     {
-        $currentWordIndex = $_SESSION['wordIndex'];
+        $currentWordIndex = $_SESSION['wordIndex'] ?? -1;
 
         while (1) {
             $newWordIndex = array_rand($this->words);
@@ -149,6 +163,15 @@ class LanguageGame
         }
 
         $_SESSION['wordIndex'] = $newWordIndex;
+
+        if (!key_exists($newWordIndex, $this->wordsTimesSelected)) {
+            $this->wordsTimesSelected[$newWordIndex] = 1;
+        } else {
+            $timesRequested = $this->wordsTimesSelected[$newWordIndex];
+            $this->wordsTimesSelected[$newWordIndex] = $timesRequested + 1;
+        }
+
+        $_SESSION['wordsTimesSelected'] = $this->wordsTimesSelected;
     }
 
     public function getWordToTranslate()
@@ -158,7 +181,7 @@ class LanguageGame
 
     private function reset()
     {
-        $this->selectRandomWord();
+        // $this->selectRandomWord();
         $this->player->score = 0;
         $this->player->errors = 0;
         $this->player->setName('Anonymous');
