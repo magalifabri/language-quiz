@@ -89,7 +89,10 @@ class LanguageGame
 
         // handle pass button
         if (array_key_exists('pass', $_POST)) {
-            $this->selectRandomWord();
+            if ($this->player->passes > 0) {
+                $this->selectRandomWord();
+                $this->player->passes--;
+            }
         }
 
         // check game state

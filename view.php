@@ -49,7 +49,7 @@
 			<p class="language from">English:</p>
 			<p class="word-to-translate"><?= $game->getWordToTranslate() ?></p>
 			<form action="" method="POST" class="pass">
-				<button name="pass">pass</button>
+				<button name="pass">pass (<?= $game->player->passes ?>)</button>
 			</form>
 			<p class="language to">French:</p>
 			<form action="" method="POST" class="translation-input-form">
