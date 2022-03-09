@@ -118,6 +118,10 @@ input {
     text-align: center;
 }
 
+.bigger {
+    font-size: 2rem;
+}
+
 .end-condition {
     font-size: 1.5rem;
     font-weight: 500;

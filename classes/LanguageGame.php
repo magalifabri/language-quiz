@@ -116,7 +116,7 @@ class LanguageGame
     {
         $this->verificationStatusMsg =
             "
-                <p>Correct!</p>
+                <p class='bigger'>Correct!</p>
                 <p><b><i> $givenAnswer </i></b> (FR) is <b><i> $selectedWord->word </i></b> (EN)</p>
                 <p>New word selected</p>
             ";
@@ -130,7 +130,7 @@ class LanguageGame
     {
         $this->verificationStatusMsg =
             "
-                <p>Wrong!</p>
+                <p class='bigger'>Wrong!</p>
                 <p><b><i> $selectedWord->answer </i></b> (FR) is <b><i> $selectedWord->word </i></b> (EN)</p>
                 <p><small>( Your answer: <i> $givenAnswer </i>)</small></p>
                 <p>Correct your answer</p>
@@ -148,7 +148,7 @@ class LanguageGame
     {
         $this->verificationStatusMsg =
             "
-                <p>Almost!</p>
+                <p class='bigger'>Almost!</p>
                 <p><b><i> $selectedWord->answer </i></b> (FR) is <b><i> $selectedWord->word </i></b> (EN)</p>
                 <p><small>( Your answer: <i> $givenAnswer </i>)</small></p>
                 <p>Correct your answer</p>
