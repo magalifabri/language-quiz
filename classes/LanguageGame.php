@@ -6,7 +6,6 @@ class LanguageGame
     public string $verificationStatusMsg;
     public Player $player;
     public array $wordsTimesSelected;
-    // public int $newWord;
 
     public int $gameState;
     const RUNNING = 1;
@@ -131,12 +130,18 @@ class LanguageGame
     {
         $this->verificationStatusMsg =
             "
-                <p>Ehhh!</p>
-                <p><b><i> $givenAnswer </i></b> (FR) is NOT <b><i> $selectedWord->word </i></b> (EN)</p>
-                <p>Try again!</p>
+                <p>Wrong!</p>
+                <p><b><i> $selectedWord->answer </i></b> (FR) is <b><i> $selectedWord->word </i></b> (EN)</p>
+                <p><small>( Your answer: <i> $givenAnswer </i>)</small></p>
+                <p>Correct your answer</p>
             ";
 
-        $this->player->errors = $this->player->errors + 1;
+        if ($_SESSION['newWord'] === 0) {
+            $this->player->errors = $this->player->errors + 1;
+        } else {
+            $this->verificationStatusMsg .= '<p><small>( First error is free )</small></p>';
+            $_SESSION['newWord'] = 0;
+        }
     }
 
     private function handleAlmostTranslation($givenAnswer, $selectedWord)
@@ -145,11 +150,9 @@ class LanguageGame
             "
                 <p>Almost!</p>
                 <p><b><i> $selectedWord->answer </i></b> (FR) is <b><i> $selectedWord->word </i></b> (EN)</p>
-                <p>( Your answer: <i> $givenAnswer </i>)
-                <p>New word selected</p>
+                <p><small>( Your answer: <i> $givenAnswer </i>)</small></p>
+                <p>Correct your answer</p>
             ";
-
-        $this->selectRandomWord();
     }
 
     public function selectRandomWord()
@@ -161,6 +164,12 @@ class LanguageGame
             if ($newWordIndex != $currentWordIndex) {
                 break;
             }
+        }
+
+        if ($this->wordsTimesSelected[$newWordIndex] === 0) {
+            $_SESSION['newWord'] = 1;
+        } else {
+            $_SESSION['newWord'] = 0;
         }
 
         $_SESSION['wordIndex'] = $newWordIndex;
