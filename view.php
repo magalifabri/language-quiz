@@ -8,15 +8,20 @@
 
 	<link rel="stylesheet" href="./style.css">
 
+	<!-- <script defer src="./index.js"></script> -->
+
 	<title>Game</title>
 </head>
 
 <body>
-
+	<!-- <div class="counter"></div> -->
 	<?php if ($game->player->name === 'Anonymous 👤') : ?>
 		<div class="username-form full-vp">
 			<form action="" method="POST" class="username">
-				<input id="username" type="text" name="username" placeholder="username" autocomplete="off">
+				<input type="text" name="username" placeholder="username" autocomplete="off">
+				<!-- <br>
+				<br>
+				<input type="number" name="numRounds" placeholder="# rounds"> -->
 			</form>
 		</div>
 	<?php elseif ($game->gameState !== $game::RUNNING) : ?>
@@ -27,7 +32,7 @@
 				<p class="end-condition">you lose</p>
 			<?php endif ?>
 			<div>
-				<p><?= $game->player->score ?> √</p>
+				<p><?= $game->player->score ?> ✓</p>
 				<p><?= $game->player->errors ?> ×</p>
 			</div>
 			<form action="" method="POST">
@@ -37,7 +42,7 @@
 	<?php else : ?>
 		<div class="top-bar">
 			<p>Hello <?= $game->player->name ?></p>
-			<p><?= $game->player->score ?> √ - <?= $game->player->errors ?> ×</p>
+			<p><?= $game->player->score ?> ✓ - <?= $game->player->errors ?> ×</p>
 			<form action="" method="POST">
 				<button name="reset">reset</button>
 			</form>
@@ -53,7 +58,7 @@
 			</form>
 			<p class="language to">French:</p>
 			<form action="" method="POST" class="translation-input-form">
-				<input id="word" type="text" name="word" placeholder="translation" autocomplete="off">
+				<input id="word" type="text" name="word" value="<?= $_POST['word'] ?? '' ?>" placeholder="translation" autocomplete="off">
 			</form>
 		</div>
 
@@ -61,6 +66,11 @@
 			<div class="verificationStatusMsg">
 				<?= $game->verificationStatusMsg ?>
 			</div>
+		<?php endif ?>
+		<?php if (!empty($_SESSION['continueButtonVisible'])) : ?>
+			<form action="" method="POST" class="continueButton">
+				<button name="continue" value="1">continue</button>
+			</form>
 		<?php endif ?>
 
 	<?php endif ?>

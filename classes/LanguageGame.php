@@ -66,13 +66,25 @@ class LanguageGame
             return;
         }
 
-        // select random word
-        if (!isset($_SESSION['wordIndex'])) {
-            $this->selectRandomWord();
+        // check continue button
+        if (!empty($_SESSION['continueButtonVisible'])) {
+            if (!empty($_POST['continue'])) {
+                $this->selectRandomWord();
+                $_SESSION['continueButtonVisible'] = false;
+            } else {
+                // when continueButtonVisible, but not clicked, it's a resubmission, so don't handle it further
+                return;
+            }
         }
 
         // check user input
         if (!empty($_POST['word'])) {
+            // if (time() - $_SESSION['startTime'] >= 5) {
+            //     echo 'too slow';
+            // } else {
+            //     echo 'in time';
+            // }
+
             $givenAnswer = $_POST['word'];
             $selectedWord = $this->words[$_SESSION['wordIndex']];
 
@@ -85,6 +97,11 @@ class LanguageGame
             } else {
                 $this->handleAlmostTranslation($givenAnswer, $selectedWord);
             }
+        }
+
+        // select random word on first visit
+        if (!isset($_SESSION['wordIndex'])) {
+            $this->selectRandomWord();
         }
 
         // handle pass button
@@ -120,13 +137,10 @@ class LanguageGame
         $this->verificationStatusMsg =
             "
                 <p class='bigger'>Correct!</p>
-                <p><b><i> $givenAnswer </i></b> (FR) is <b><i> $selectedWord->word </i></b> (EN)</p>
-                <p>New word selected</p>
             ";
 
-        $this->selectRandomWord();
-
         $this->player->score = $this->player->score + 1;
+        $_SESSION['continueButtonVisible'] = true;
     }
 
     private function handleIncorrectTranslation($givenAnswer, $selectedWord)
@@ -135,7 +149,6 @@ class LanguageGame
             "
                 <p class='bigger'>Wrong!</p>
                 <p><b><i> $selectedWord->answer </i></b> (FR) is <b><i> $selectedWord->word </i></b> (EN)</p>
-                <p><small>( Your answer: <i> $givenAnswer </i>)</small></p>
                 <p>Correct your answer</p>
             ";
 
@@ -153,13 +166,14 @@ class LanguageGame
             "
                 <p class='bigger'>Almost!</p>
                 <p><b><i> $selectedWord->answer </i></b> (FR) is <b><i> $selectedWord->word </i></b> (EN)</p>
-                <p><small>( Your answer: <i> $givenAnswer </i>)</small></p>
                 <p>Correct your answer</p>
             ";
     }
 
     public function selectRandomWord()
     {
+        // $_SESSION['startTime'] = time();
+
         $currentWordIndex = $_SESSION['wordIndex'] ?? -1;
 
         while (1) {

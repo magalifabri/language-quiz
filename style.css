@@ -126,3 +126,7 @@ input {
     font-size: 1.5rem;
     font-weight: 500;
 }
+
+form.continueButton {
+    text-align: center;
+}
