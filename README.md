@@ -1,1 +1,1 @@
-https://language-quiz-magalifabri.herokuapp.com/
+https://mfabri.herokuapp.com/language-quiz/
